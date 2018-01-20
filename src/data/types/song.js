@@ -1,30 +1,30 @@
 export default `
   type Song {
     id: ID!
-    title: String
-    artist: Artist
-    duration: Int
+    title: String!
+    artist: Artist!
+    duration: Int!
   }
 
   type Query {
-    songs: [Song]
+    songs: [Song]!
     song(id: ID!): Song
   }
 
   type Mutation {
     createSong(
       title: String!
-      artist: String!
+      artist: ID!
       duration: Int!
     ): Song
     updateSong(
       id: ID!
       title: String
-      artist: String
+      artist: ID
       duration: Int
     ): Song
     deleteSong(
       id: ID!
     ): Song
   }
-`;
+`

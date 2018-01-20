@@ -1,0 +1,13 @@
+{
+  "extends": "standard",
+  "rules": {
+    "comma-dangle": "off",
+    "no-multiple-empty-lines": "off"
+  },
+  "plugins": [
+    "mocha"
+  ],
+  "env": {
+    "mocha": true
+  }
+}

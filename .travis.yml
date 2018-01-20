@@ -1,6 +1,6 @@
 language: node_js
 node_js:
-  - '6.10'
+  - '6.12'
 branches:
   only:
     - master
@@ -8,6 +8,7 @@ cache:
   directories:
     - node_modules
 before_install:
-  - npm i -g serverless
+  - npm i
 script:
-    - sls deploy
+  - npm run test
+  - npm run deploy
