@@ -8,18 +8,16 @@
   "dependencies": {
     "apollo-server-lambda": "^1.3.2",
     "aws-sdk": "^2.94.0",
-    "eslint-plugin-standard": "^3.0.1",
     "graphql": "^0.10.5",
     "graphql-tools": "^1.1.0",
     "merge-graphql-schemas": "^1.1.1",
-    "uuid": "^3.1.0"
+    "uuid": "^3.1.0",
+    "babel-polyfill": "^6.26.0"
   },
   "devDependencies": {
-    "aws-sdk-mock": "^1.7.0",
     "babel-core": "^6.26.0",
     "babel-eslint": "^8.2.1",
     "babel-loader": "^7.1.1",
-    "babel-polyfill": "^6.26.0",
     "babel-preset-env": "^1.6.1",
     "babel-preset-stage-0": "^6.24.1",
     "eslint": "^4.15.0",
@@ -29,7 +27,6 @@
     "imports-loader": "^0.7.1",
     "mocha": "^5.0.0",
     "serverless-dynamodb-local": "^0.2.27",
-    "serverless-mocha-plugin": "^1.7.0",
     "serverless-offline": "^3.16.0",
     "serverless-webpack": "^2.2.0",
     "webpack": "^3.4.1",

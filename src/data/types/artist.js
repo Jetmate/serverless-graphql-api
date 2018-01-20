@@ -15,7 +15,7 @@ export default `
     createArtist(
       first_name: String!
       last_name: String!
-      songs: [Song]!
+      songs: [ID]!
     ): Artist
     updateArtist(
       id: ID!

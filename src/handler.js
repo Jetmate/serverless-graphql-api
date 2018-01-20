@@ -32,5 +32,5 @@ exports.graphql = (event, context, callback) => {
 }
 
 exports.graphiql = graphiqlLambda({
-  endpointURL: '/graphql',
+  endpointURL: process.env.IS_OFFLINE ? '/graphql' : '/dev/graphql'
 })

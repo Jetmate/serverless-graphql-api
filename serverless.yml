@@ -13,11 +13,7 @@ provider:
         - dynamodb:PutItem
         - dynamodb:UpdateItem
         - dynamodb:DeleteItem
-        - dynamodb:GetRecords
-        - dynamodb:GetShardIterator
-        - dynamodb:DescribeStream
-        - dynamodb:ListStreams
-      Resource: arn:aws:dynamodb:us-east-1:*:*
+      Resource: "arn:aws:dynamodb:${opt:region, self:provider.region}:*:*"
 
 functions:
   graphql:
@@ -64,7 +60,6 @@ resources:
           WriteCapacityUnits: 1
 
 plugins:
-  - serverless-mocha-plugin
   - serverless-webpack
   - serverless-dynamodb-local
   - serverless-offline
