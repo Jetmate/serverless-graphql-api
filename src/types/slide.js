@@ -6,27 +6,30 @@ interface Slide {
 }
 
 
-type slideKeysInput {
+input slideKeysInput {
   lesson: String!
   course: String!
 }
 
-type slideFilterInput {
+input slideFilterInput {
   title: String!
 }
 
-extend type Query {
+type Query {
   slide(keys: slideKeysInput!, filter: slideFilterInput!): Slide
   slides(keys: slideKeysInput!, limit: Int): [Slide]!
 }
 
 
-extend type Mutation {
+type Mutation {
   deleteSlide(title: String!, lesson: String!, course: String!): Slide
 }
 
 
 type QuizSlide implements Slide {
+  title: String!
+  lesson: String!
+  course: String!
   questions: [Question!]!
 }
 
@@ -70,6 +73,9 @@ extend type Mutation {
 
 
 type InstructionSlide implements Slide {
+  title: String!
+  lesson: String!
+  course: String!
   description: String!
   hint: String!
   code: String!
@@ -100,6 +106,9 @@ extend type Mutation {
 }
 
 type ProjectSlide implements Slide {
+  title: String!
+  lesson: String!
+  course: String!
   description: String!
   code: String!
 }

@@ -5,10 +5,9 @@ import { mergeResolvers, mergeTypes } from 'merge-graphql-schemas'
 import * as types from './types'
 import * as resolvers from './resolvers'
 
-
 const schema = makeExecutableSchema({
-  typeDefs: mergeTypes(types),
-  resolvers: mergeResolvers(resolvers),
+  typeDefs: mergeTypes(Object.values(types)),
+  resolvers: mergeResolvers(Object.values(resolvers)),
 })
 
 exports.graphql = (event, context, callback) => {

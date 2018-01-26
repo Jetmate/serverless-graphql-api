@@ -32,44 +32,44 @@ functions:
 
 resources:
   Resources:
-    usersTable:
+    UsersDynamoDbTable:
       Type: AWS::DynamoDB::Table
       Properties:
-        TableName: 'users'
+        TableName: users
         AttributeDefinitions:
           - AttributeName: username
             AttributeType: S
         KeySchema:
-          - AttributeName: id
+          - AttributeName: username
             KeyType: HASH
         ProvisionedThroughput:
           ReadCapacityUnits: 1
           WriteCapacityUnits: 1
-    coursesTable:
+    CoursesDynamoDbTable:
+      Type: AWS::DynamoDB::Table
       Properties:
-        TableName: 'courses'
+        TableName: courses
         AttributeDefinitions:
           - AttributeName: title
             AttributeType: S
         KeySchema:
-          - AttributeName: id
+          - AttributeName: title
             KeyType: HASH
         ProvisionedThroughput:
           ReadCapacityUnits: 1
           WriteCapacityUnits: 1
-    lessonsTable:
+    LessonsDynamoDbTable:
+      Type: AWS::DynamoDB::Table
       Properties:
-        TableName: 'lessons'
+        TableName: lessons
         AttributeDefinitions:
           - AttributeName: title
             AttributeType: S
-        AttributeDefinitions:
           - AttributeName: course
             AttributeType: S
         KeySchema:
           - AttributeName: title
             KeyType: HASH
-        KeySchema:
           - AttributeName: course
             KeyType: RANGE
         ProvisionedThroughput:

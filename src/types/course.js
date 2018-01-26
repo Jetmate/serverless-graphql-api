@@ -14,7 +14,7 @@ input courseKeysInput {
   title: String!
 }
 
-extend type Query {
+type Query {
   courses(limit: Int): [Course]!
   course(keys: courseKeysInput!): Course
 }
@@ -23,7 +23,7 @@ extend type Query {
 input createCourseInput {
   title: String!
   language: Language!
-  creator: User!
+  creator: String!
 }
 
 input editCourseInput {
@@ -31,7 +31,7 @@ input editCourseInput {
   lessons: [String]
 }
 
-extend type Mutation {
+type Mutation {
   createCourse(input: createCourseInput!): Course
   editCourse(keys: courseKeysInput!, input: editCourseInput!): Course
   deleteCourse(keys: courseKeysInput!): Course

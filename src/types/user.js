@@ -6,7 +6,6 @@ type User {
 }
 
 type CourseInfo {
-  course: Course!
   type: CourseStatus!
 }
 
@@ -35,7 +34,11 @@ input createUserInput {
 input editUserInput {
   username: String
   bio: String
-  courses: [String]
+  courses: [CourseInfoInput]
+}
+
+input CourseInfoInput {
+  type: CourseStatus!
 }
 
 type Mutation {
