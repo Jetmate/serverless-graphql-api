@@ -13,7 +13,7 @@ export default {
   },
   Course: {
     creator: course => {
-      return dbUsers.get(course.creator)
+      return dbUsers.get({ keys: { username: course.creator } })
     },
   },
 }

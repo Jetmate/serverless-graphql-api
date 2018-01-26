@@ -10,10 +10,13 @@ enum Language {
   PYTHON
 }
 
+input courseKeysInput {
+  title: String!
+}
 
 extend type Query {
   courses(limit: Int): [Course]!
-  course(title: String!): Course
+  course(keys: courseKeysInput!): Course
 }
 
 
@@ -29,8 +32,8 @@ input editCourseInput {
 }
 
 extend type Mutation {
-  createCourse(input: createCourseInput!): Course!
-  editCourse(title: String!, input: editCourseInput!): Result!
-  deleteCourse(title: String!): Result!
+  createCourse(input: createCourseInput!): Course
+  editCourse(keys: courseKeysInput!, input: editCourseInput!): Course
+  deleteCourse(keys: courseKeysInput!): Course
 }
 `

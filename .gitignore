@@ -8,3 +8,4 @@ yarn.lock
 .vscode
 .webpack
 package-lock.json
+testing_secret.json

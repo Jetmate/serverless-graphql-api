@@ -13,7 +13,7 @@ export default {
   },
   CourseInfo: {
     course: courseInfo => {
-      return dbCourses.get(courseInfo.course)
+      return dbCourses.get({ keys: { title: courseInfo.course } })
     },
   },
 }

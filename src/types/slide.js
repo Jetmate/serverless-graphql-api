@@ -17,7 +17,7 @@ type slideFilterInput {
 
 extend type Query {
   slide(keys: slideKeysInput!, filter: slideFilterInput!): Slide
-  slides(keys: slideKeysInput!, filter: slideFilterInput!, limit: Int): [Slide]!
+  slides(keys: slideKeysInput!, limit: Int): [Slide]!
 }
 
 

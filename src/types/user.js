@@ -41,6 +41,6 @@ input editUserInput {
 type Mutation {
   createUser(input: createUserInput!): User
   editUser(keys: userKeysInput!, input: editUserInput!): User
-  deleteUser(kesy: userKeysInput!): User
+  deleteUser(keys: userKeysInput!): User
 }
 `
