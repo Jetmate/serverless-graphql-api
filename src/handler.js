@@ -2,20 +2,13 @@ import { graphqlLambda, graphiqlLambda } from 'apollo-server-lambda'
 import { makeExecutableSchema } from 'graphql-tools'
 import { mergeResolvers, mergeTypes } from 'merge-graphql-schemas'
 
-// Types
-import artistType from './data/types/artist'
-import songType from './data/types/song'
+import * as types from './types'
+import * as resolvers from './resolvers'
 
-// Resolvers
-import artistResolver from './data/resolvers/artist'
-import songResolver from './data/resolvers/song'
-
-const typeDefs = mergeTypes([artistType, songType])
-const resolvers = mergeResolvers([artistResolver, songResolver])
 
 const schema = makeExecutableSchema({
-  typeDefs,
-  resolvers,
+  typeDefs: mergeTypes(types),
+  resolvers: mergeResolvers(resolvers),
 })
 
 exports.graphql = (event, context, callback) => {

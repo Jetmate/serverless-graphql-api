@@ -32,12 +32,12 @@ functions:
 
 resources:
   Resources:
-    ArtistsDynamoDbTable:
+    usersTable:
       Type: AWS::DynamoDB::Table
       Properties:
-        TableName: 'artists'
+        TableName: 'users'
         AttributeDefinitions:
-          - AttributeName: id
+          - AttributeName: username
             AttributeType: S
         KeySchema:
           - AttributeName: id
@@ -45,12 +45,11 @@ resources:
         ProvisionedThroughput:
           ReadCapacityUnits: 1
           WriteCapacityUnits: 1
-    SongsDynamoDbTable:
-      Type: AWS::DynamoDB::Table
+    coursesTable:
       Properties:
-        TableName: 'songs'
+        TableName: 'courses'
         AttributeDefinitions:
-          - AttributeName: id
+          - AttributeName: title
             AttributeType: S
         KeySchema:
           - AttributeName: id
@@ -58,6 +57,25 @@ resources:
         ProvisionedThroughput:
           ReadCapacityUnits: 1
           WriteCapacityUnits: 1
+    lessonsTable:
+      Properties:
+        TableName: 'lessons'
+        AttributeDefinitions:
+          - AttributeName: title
+            AttributeType: S
+        AttributeDefinitions:
+          - AttributeName: course
+            AttributeType: S
+        KeySchema:
+          - AttributeName: title
+            KeyType: HASH
+        KeySchema:
+          - AttributeName: course
+            KeyType: RANGE
+        ProvisionedThroughput:
+          ReadCapacityUnits: 1
+          WriteCapacityUnits: 1
+
 
 plugins:
   - serverless-webpack

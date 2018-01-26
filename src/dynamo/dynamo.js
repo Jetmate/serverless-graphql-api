@@ -24,3 +24,11 @@ export function update (args) {
 export function del (args) {
   return dynamoDb.delete(args).promise()
 }
+
+export function batchGet (args) {
+  return dynamoDb.batchGet(args).promise()
+}
+
+export function batchWrite (args) {
+  return dynamoDb.batchWrite(args).promise()
+}
