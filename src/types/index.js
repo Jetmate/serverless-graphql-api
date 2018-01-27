@@ -1,4 +1,6 @@
-// export course from './course'
-// export lesson from './lesson'
-// export slide from './slide'
+/* eslint-disable */
+
+export course from './course'
+export lesson from './lesson'
+export slide from './slide'
 export user from './user'

@@ -7,6 +7,7 @@ type User {
 
 type CourseInfo {
   type: CourseStatus!
+  course: Course!
 }
 
 enum CourseStatus {
@@ -31,19 +32,19 @@ input createUserInput {
   bio: String!
 }
 
-input editUserInput {
-  username: String
+input updateUserInput {
   bio: String
   courses: [CourseInfoInput]
 }
 
 input CourseInfoInput {
   type: CourseStatus!
+  course: String!
 }
 
 type Mutation {
   createUser(input: createUserInput!): User
-  editUser(keys: userKeysInput!, input: editUserInput!): User
+  updateUser(keys: userKeysInput!, input: updateUserInput!): User
   deleteUser(keys: userKeysInput!): User
 }
 `

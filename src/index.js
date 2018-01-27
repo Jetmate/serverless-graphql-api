@@ -15,7 +15,7 @@ import mongo from './schema/mongo'
 import secrets from '../client_secret.json'
 import testingSecret from '../testing_secret.json'
 
-;(async () => {
+  ;(async () => {
   const app = express()
   if (process.env.NODE_ENV === 'production') {
     app.listen(3002, '0.0.0.0')

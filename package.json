@@ -2,7 +2,9 @@
   "name": "graphql-api",
   "scripts": {
     "deploy": "sls deploy",
-    "test": "eslint src --fix && mocha --require babel-core/register --ui qunit",
+    "eslint": "eslint src --fix",
+    "mocha": "mocha test/index.js --require babel-core/register --ui qunit",
+    "test": "npm run eslint; npm run mocha",
     "offline": "sls offline start"
   },
   "dependencies": {

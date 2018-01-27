@@ -26,14 +26,9 @@ input createCourseInput {
   creator: String!
 }
 
-input editCourseInput {
-  title: String
-  lessons: [String]
-}
-
 type Mutation {
   createCourse(input: createCourseInput!): Course
-  editCourse(keys: courseKeysInput!, input: editCourseInput!): Course
+  updateCourse: Course
   deleteCourse(keys: courseKeysInput!): Course
 }
 `

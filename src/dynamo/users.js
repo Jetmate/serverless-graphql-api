@@ -1,3 +1,3 @@
-import boilerplate from './boilerplate'
+import Boilerplate from './boilerplate'
 
-export default boilerplate('users')
+export default new Boilerplate('users')

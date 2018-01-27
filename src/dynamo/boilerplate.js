@@ -1,6 +1,6 @@
 import * as db from './dynamo'
 
-function stringExpression (update, beginning = '') {
+export function stringExpression (update, beginning = '') {
   return Object.keys(update).reduce(([expression, values], val, i) => {
     return [
       expression + `${val} = :${val}` + (
@@ -11,79 +11,82 @@ function stringExpression (update, beginning = '') {
   }, [beginning, {}])
 }
 
-export default function (TableName) {
-  const boilerplate = {}
-
-  boilerplate.batchGet = async ({ ids }) => {
-    const result = await db.batchGet({ RequestItems: {
-      [TableName]: { Keys: ids.map(id => ({ id })) }
-    } })
-
-    console.log(result)
-    return result[TableName]
+export default class Boilerplate {
+  constructor (tableName) {
+    this.tableName = tableName
   }
 
-  boilerplate.batchPut = async (items) => {
-    const result = await db.batchWrite({ RequestItems:
-      items.map(Item => ({ PutRequest: { Item } }))
-    })
+  // async batchGet ({ ids }) {
+  //   const result = await db.batchGet({ RequestItems: {
+  //     [this.tableName]: { Keys: ids.map(id => ({ id })) }
+  //   } })
 
-    console.log(result)
-  }
+  //   console.log(result)
+  //   return result[this.tableName]
+  // }
 
-  boilerplate.batchDel = async (ids) => {
-    const result = await db.batchWrite({ RequestItems:
-      ids.map(id => ({ DeleteRequest: { Key: { id } } }))
-    })
+  // async batchPut (items) {
+  //   const result = await db.batchWrite({ RequestItems:
+  //     items.map(Item => ({ PutRequest: { Item } }))
+  //   })
 
-    console.log(result)
-  }
+  //   console.log(result)
+  // }
 
-  boilerplate.getAll = async ({ keys, limit: Limit = 0 }) => {
+  // async batchDel (ids) {
+  //   const result = await db.batchWrite({ RequestItems:
+  //     ids.map(id => ({ DeleteRequest: { Key: { id } } }))
+  //   })
+
+  //   console.log(result)
+  // }
+
+  async getAll ({ keys, limit: Limit }) {
     let result
     if (keys) {
       const [KeyConditionExpression, ExpressionAttributeValues] = stringExpression(keys)
-      result = await db.query({ TableName, Limit, KeyConditionExpression, ExpressionAttributeValues })
-    } else result = await db.scan({ TableName, Limit })
+      result = await db.query({ TableName: this.tableName, Limit, KeyConditionExpression, ExpressionAttributeValues })
+    } else result = await db.scan({ TableName: this.tableName, Limit })
 
-    console.log(result)
+    console.log('getAll', result)
     return result.Items
   }
 
-  boilerplate.get = async ({ keys: Key }) => {
-    const result = await db.get({ TableName, Key })
+  async get ({ keys: Key }) {
+    const result = await db.get({ TableName: this.tableName, Key })
 
-    console.log(result)
+    console.log('get', result)
     return result.Item
   }
 
-  boilerplate.put = async ({ input: Item }) => {
+  async put ({ input: Item }) {
     const result = await db.put({
-      TableName,
+      TableName: this.tableName,
       Item,
     })
 
-    console.log(result)
+    console.log('put', result)
   }
 
-  boilerplate.update = async ({ keys: Key, input }) => {
+  async update ({ keys: Key, input }) {
     const [UpdateExpression, ExpressionAttributeValues] = stringExpression(input, 'SET ')
 
     const result = await db.update({
-      TableName,
+      TableName: this.tableName,
       Key,
       UpdateExpression,
       ExpressionAttributeValues,
     })
 
-    console.log(result)
+    console.log('update', result)
   }
 
-  boilerplate.del = async ({ keys: Key }) => {
-    const result = await db.del({ TableName, Key })
+  async del ({ keys: Key }) {
+    const result = await db.del({
+      TableName: this.tableName,
+      Key,
+    })
 
-    console.log(result)
+    console.log('del', result)
   }
-
-  return boilerplate
 }

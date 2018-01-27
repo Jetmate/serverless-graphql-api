@@ -1,3 +1,3 @@
-import boilerplate from './boilerplate'
+import Boilerplate from './boilerplate'
 
-export default boilerplate('lessons')
+export default new Boilerplate('lessons')

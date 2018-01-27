@@ -51,7 +51,7 @@ input createQuizSlideInput {
   questions: [questionInput!]!
 }
 
-input editQuizSlideInput {
+input updateQuizSlideInput {
   title: String
   questions: [questionInput]
 }
@@ -68,7 +68,7 @@ input answerInput {
 
 extend type Mutation {
   createQuizSlide(input: createQuizSlideInput!): Slide
-  editQuizSlide(keys: slideKeysInput!, filter: slideFilterInput!, input: editQuizSlideInput!): Slide
+  updateQuizSlide(keys: slideKeysInput!, filter: slideFilterInput!, input: updateQuizSlideInput!): Slide
 }
 
 
@@ -92,7 +92,7 @@ input createInstructionSlideInput {
   correctOutput: [String]!
 }
 
-input editInstructionSlideInput {
+input updateInstructionSlideInput {
   title: String
   description: String
   hint: String
@@ -102,7 +102,7 @@ input editInstructionSlideInput {
 
 extend type Mutation {
   createInstructionSlide(input: createInstructionSlideInput!): Slide
-  editInstructionSlide(keys: slideKeysInput!, filter: slideFilterInput!, input: editInstructionSlideInput!): Slide
+  updateInstructionSlide(keys: slideKeysInput!, filter: slideFilterInput!, input: updateInstructionSlideInput!): Slide
 }
 
 type ProjectSlide implements Slide {
@@ -121,7 +121,7 @@ input createProjectSlideInput {
   code: String!
 }
 
-input editProjectSlideInput {
+input updateProjectSlideInput {
   title: String
   description: String
   code: String
@@ -129,7 +129,7 @@ input editProjectSlideInput {
 
 extend type Mutation {
   createProjectSlide(input: createProjectSlideInput!): Slide
-  editProjectSlide(keys: slideKeysInput!, filter: slideFilterInput!, input: editProjectSlideInput!): Slide
+  updateProjectSlide(keys: slideKeysInput!, filter: slideFilterInput!, input: updateProjectSlideInput!): Slide
 }
 
 `
