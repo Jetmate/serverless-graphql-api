@@ -8,11 +8,11 @@ function createVariables (variables) {
     let value = variables[key]
     if (typeof variables[key] === 'object') {
       value = Object.keys(variables[key]).reduce((expression2, key2, i2) => {
-        let value = variables[key][key2]
-        if (typeof variables[key][key2] === 'string') {
-          value = `"${value}"`
-        }
-        return expression2 + `${key2}: ${value}` + (
+        // let value = variables[key][key2]
+        // if (typeof variables[key][key2] === 'string') {
+        //   value = `"${value}"`
+        // }
+        return expression2 + `${key2}: ${variables[key][key2]}` + (
           i2 === (Object.keys(variables[key]).length - 1) ? '' : ', '
         )
       }, '')
@@ -24,6 +24,9 @@ function createVariables (variables) {
   }, '')
 }
 
+function capitalize (string) {
+  return string.charAt(0).toUpperCase() + string.slice(1)
+}
 
 async function testQuery (name, field, variables, testResult = true) {
   test(name, async () => {
@@ -49,25 +52,45 @@ async function graphql (type, name, field, variables) {
   `)
 }
 
-suite('User')
+function testSuite (name, field, initial, update) {
+  const key = { [field]: initial[field] }
 
-testMutation('createUser', {
-  input: { username: 'a', bio: 'a' },
-})
-testQuery('user', 'username', {
-  keys: { username: 'a' },
-})
-testQuery('users', 'username', {
-  limit: 10,
-})
+  suite(capitalize(name))
 
-testMutation('updateUser', {
-  keys: { username: 'a' },
-  input: { bio: 'b' },
-})
-testMutation('deleteUser', {
-  keys: { username: 'a' }
-})
-testQuery('users', 'username', {
-  limit: 10,
-}, false)
+  testMutation('create' + capitalize(name), {
+    input: initial,
+  })
+  testQuery(name, field, {
+    keys: key,
+  })
+  testQuery(name + 's', field, {
+    limit: 10,
+  })
+
+  if (update) {
+    testMutation('update' + capitalize(name), {
+      keys: key,
+      input: update,
+    })
+  }
+  testMutation('delete' + capitalize(name), {
+    keys: key
+  })
+  testQuery(name + 's', field, {
+    limit: 10,
+  }, false)
+}
+
+
+testSuite(
+  'user',
+  'username',
+  { username: '"a"', bio: '"b"' },
+  { bio: '"c"' },
+)
+
+testSuite(
+  'course',
+  'title',
+  { title: '"a"', language: 'PYTHON', creator: '"Jetmate"' },
+)
