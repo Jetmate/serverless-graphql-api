@@ -1,3 +1,4 @@
+import assert from 'assert'
 import { GraphQLClient } from 'graphql-request'
 
 const client = new GraphQLClient('http://localhost:3000/graphql')
@@ -23,38 +24,50 @@ function createVariables (variables) {
   }, '')
 }
 
-async function createTest (type, name, field, variables) {
-  test('name', async () => {
-    await client.request(`
+
+async function testQuery (name, field, variables, testResult = true) {
+  test(name, async () => {
+    const result = await graphql('query', name, field, variables)
+    assert(testResult === (!!result[name] && !!Object.keys(result[name]).length))
+  })
+}
+
+async function testMutation (name, variables) {
+  test(name, async () => {
+    const result = await graphql('mutation', name, 'success', variables)
+    assert(result[name] && result[name].success)
+  })
+}
+
+async function graphql (type, name, field, variables) {
+  return client.request(`
     ${type} {
       ${name}(${createVariables(variables)}) {
         ${field}
       }
     }
-    `)
-  })
+  `)
 }
 
 suite('User')
 
-createTest('mutation', 'createUser', 'username', {
+testMutation('createUser', {
   input: { username: 'a', bio: 'a' },
 })
-
-createTest('query', 'user', 'username', {
+testQuery('user', 'username', {
   keys: { username: 'a' },
 })
-createTest('query', 'users', 'username', {
+testQuery('users', 'username', {
   limit: 10,
 })
 
-createTest('mutation', 'updateUser', 'username', {
+testMutation('updateUser', {
   keys: { username: 'a' },
   input: { bio: 'b' },
 })
-createTest('mutation', 'deleteUser', 'username', {
-  keys: { username: 'b' }
+testMutation('deleteUser', {
+  keys: { username: 'a' }
 })
-createTest('query', 'users', 'username', {
+testQuery('users', 'username', {
   limit: 10,
-})
+}, false)

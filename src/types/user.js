@@ -43,8 +43,8 @@ input CourseInfoInput {
 }
 
 type Mutation {
-  createUser(input: createUserInput!): User
-  updateUser(keys: userKeysInput!, input: updateUserInput!): User
-  deleteUser(keys: userKeysInput!): User
+  createUser(input: createUserInput!): Result!
+  updateUser(keys: userKeysInput!, input: updateUserInput!): Result!
+  deleteUser(keys: userKeysInput!): Result!
 }
 `

@@ -27,8 +27,8 @@ input createCourseInput {
 }
 
 type Mutation {
-  createCourse(input: createCourseInput!): Course
-  updateCourse: Course
-  deleteCourse(keys: courseKeysInput!): Course
+  createCourse(input: createCourseInput!): Result!
+  updateCourse: Result!
+  deleteCourse(keys: courseKeysInput!): Result!
 }
 `

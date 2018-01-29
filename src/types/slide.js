@@ -67,8 +67,8 @@ input answerInput {
 }
 
 extend type Mutation {
-  createQuizSlide(input: createQuizSlideInput!): Slide
-  updateQuizSlide(keys: slideKeysInput!, filter: slideFilterInput!, input: updateQuizSlideInput!): Slide
+  createQuizSlide(input: createQuizSlideInput!): Result!
+  updateQuizSlide(keys: slideKeysInput!, filter: slideFilterInput!, input: updateQuizSlideInput!): Result!
 }
 
 
@@ -101,8 +101,8 @@ input updateInstructionSlideInput {
 }
 
 extend type Mutation {
-  createInstructionSlide(input: createInstructionSlideInput!): Slide
-  updateInstructionSlide(keys: slideKeysInput!, filter: slideFilterInput!, input: updateInstructionSlideInput!): Slide
+  createInstructionSlide(input: createInstructionSlideInput!): Result!
+  updateInstructionSlide(keys: slideKeysInput!, filter: slideFilterInput!, input: updateInstructionSlideInput!): Result!
 }
 
 type ProjectSlide implements Slide {
@@ -128,8 +128,8 @@ input updateProjectSlideInput {
 }
 
 extend type Mutation {
-  createProjectSlide(input: createProjectSlideInput!): Slide
-  updateProjectSlide(keys: slideKeysInput!, filter: slideFilterInput!, input: updateProjectSlideInput!): Slide
+  createProjectSlide(input: createProjectSlideInput!): Result!
+  updateProjectSlide(keys: slideKeysInput!, filter: slideFilterInput!, input: updateProjectSlideInput!): Result!
 }
 
 `

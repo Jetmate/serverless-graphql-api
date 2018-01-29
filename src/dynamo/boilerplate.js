@@ -66,6 +66,7 @@ export default class Boilerplate {
     })
 
     console.log('put', result)
+    return { success: true }
   }
 
   async update ({ keys: Key, input }) {
@@ -76,17 +77,21 @@ export default class Boilerplate {
       Key,
       UpdateExpression,
       ExpressionAttributeValues,
+      ReturnValues: 'ALL_OLD',
     })
 
     console.log('update', result)
+    return { success: !!Object.keys(result).length }
   }
 
   async del ({ keys: Key }) {
     const result = await db.del({
       TableName: this.tableName,
       Key,
+      ReturnValues: 'ALL_OLD',
     })
 
     console.log('del', result)
+    return { success: !!Object.keys(result).length }
   }
 }
